@@ -17,8 +17,8 @@ limiter = Limiter(
 )
 
 # turn off logging in output logs (no http post prints)
-log = logging.getLogger('werkzeug')
-log.disabled = True
+#log = logging.getLogger('werkzeug')
+#log.disabled = True
 
 # limiter 2, dictionary so that different servers can't spam the same endpoint
 internalLimiter = {}
