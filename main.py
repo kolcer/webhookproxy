@@ -2,6 +2,7 @@
 from flask import Flask, request
 
 import requests
+import os
 
 
 app = Flask(__name__)
@@ -17,4 +18,4 @@ def proxy(id, str):
 
 # Run application
 if __name__ == "__main__":
-  app.run()
+  app.run(host='0.0.0.0', port=os.environ['PORT'])
