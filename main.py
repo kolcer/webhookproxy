@@ -17,9 +17,8 @@ log.disabled = True
 def proxy(password,id, str):
  
   if password != os.environ['WEBHOOK_PASSWORD']:
-    print('old server')
-  else:
-    print('new server')
+    return "", 403 # forbidden
+  
 
   data = request.get_json(force = True)
   response = requests.post("https://discord.com/api/webhooks/"+id+"/"+str, json = data)
