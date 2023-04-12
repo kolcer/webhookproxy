@@ -22,7 +22,18 @@ def proxy(password,id, str):
   
 
   data = request.get_json(force = True)
-  print(data)
+
+  if data['NotificationId']:
+    newData = {
+      'username': data['EventType'],
+      'content': data['EventTime'] + '\n'
+    }
+
+    for i, v in data['EventPayload'].items():
+      newData['content'] += i + str(v) + '\n'
+
+    data = newData
+     
 
   response = requests.post("https://discord.com/api/webhooks/"+id+"/"+str, json = data)
   return "", int(response.status_code)
