@@ -10,8 +10,8 @@ app = Flask(__name__)
 
 
 # turn off logging in output logs (no http post prints, as they include password)
-log = logging.getLogger('werkzeug')
-log.disabled = True
+#log = logging.getLogger('werkzeug')
+#log.disabled = True
 
 # Webhook routing api
 @app.route("/api/<password>/<id>/<str>", methods = ["POST"])
