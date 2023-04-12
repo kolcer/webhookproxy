@@ -14,7 +14,7 @@ app = Flask(__name__)
 #log.disabled = True
 
 # Webhook routing api
-@app.route("/api/<password>/<id>/<str>", methods = ["POST"])
+@app.route("/api/<password>/<id>/<string>", methods = ["POST"])
 def proxy(password,id, string):
  
   if password != os.environ['WEBHOOK_PASSWORD']:
