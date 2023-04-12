@@ -23,15 +23,16 @@ def proxy(password,id, string):
 
   data = request.get_json(force = True)
 
-  if data['NotificationId']:
+  if 'NotificationId' in data:
     newData = {
       'username': data['EventType'],
       'content': data['EventTime'] + '\n'
     }
 
     for i, v in data['EventPayload'].items():
-      newData['content'] += i + str(v) + '\n'
+      newData['content'] += i + ': ' + str(v) + '\n'
 
+    newData['content'] += str({'soap': 'printu', 'danger': 'notprintu'})
     data = newData
      
 
