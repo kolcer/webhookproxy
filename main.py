@@ -31,6 +31,8 @@ def proxy(password,id, string):
 
     for i, v in data['EventPayload'].items():
       newData['content'] += i + ': ' + str(v) + '\n\n'
+
+    data = newData
      
 
   response = requests.post("https://discord.com/api/webhooks/"+id+"/"+string, json = data)
