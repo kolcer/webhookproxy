@@ -5,7 +5,7 @@ import requests
 import os
 import logging
 import json
-import datetime
+from datetime import datetime
 
 app = Flask(__name__)
 
