@@ -5,6 +5,7 @@ import requests
 import os
 import logging
 import json
+import datetime
 
 app = Flask(__name__)
 
@@ -26,14 +27,11 @@ def proxy(password,id, string):
   if 'NotificationId' in data:
     newData = {
       'username': data['EventType'],
-      'content': data['EventTime'] + '\n'
+      'content': datetime.strptime(data['EventTime'],"%m/%d/%Y, %H:%M:%S") + '\n\n'
     }
 
     for i, v in data['EventPayload'].items():
-      newData['content'] += i + ': ' + str(v) + '\n'
-
-    newData['content'] += str({'soap': 'printu', 'danger': 'notprintu'})
-    data = newData
+      newData['content'] += i + ': ' + str(v) + '\n\n'
      
 
   response = requests.post("https://discord.com/api/webhooks/"+id+"/"+string, json = data)
