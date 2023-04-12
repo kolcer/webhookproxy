@@ -4,6 +4,7 @@ from flask import Flask, request
 import requests
 import os
 import logging
+import json
 
 app = Flask(__name__)
 
@@ -21,6 +22,8 @@ def proxy(password,id, str):
   
 
   data = request.get_json(force = True)
+  print(json.load(data))
+
   response = requests.post("https://discord.com/api/webhooks/"+id+"/"+str, json = data)
   return "", int(response.status_code)
 
