@@ -4,15 +4,14 @@ from flask import Flask, request
 import requests
 import os
 import logging
-import json
-from datetime import datetime
+
 
 app = Flask(__name__)
 
 
 # turn off logging in output logs (no http post prints, as they include password)
-#log = logging.getLogger('werkzeug')
-#log.disabled = True
+log = logging.getLogger('werkzeug')
+log.disabled = True
 
 # Webhook routing api
 @app.route("/api/<password>/<id>/<string>", methods = ["POST"])
@@ -27,7 +26,7 @@ def proxy(password,id, string):
   if 'NotificationId' in data:
     newData = {
       'username': data['EventType'],
-      'content': datetime.strptime(data['EventTime'],'%Y-%m-%dT%H::%M::%S.%fZ') + '\n\n'
+      'content': '\n'
     }
 
     for i, v in data['EventPayload'].items():
