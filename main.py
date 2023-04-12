@@ -27,7 +27,7 @@ def proxy(password,id, string):
   if 'NotificationId' in data:
     newData = {
       'username': data['EventType'],
-      'content': datetime.strptime(data['EventTime'],'%dT-%m-%Y%H::%M::%S') + '\n\n'
+      'content': datetime.strptime(data['EventTime'],'%Y-%m-%dT%H::%M::%S.%f') + '\n\n'
     }
 
     for i, v in data['EventPayload'].items():
