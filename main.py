@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 # Webhook routing api
 @app.route("/api/<password>/<id>/<str>", methods = ["POST"])
-def proxy(password,id, str):
+def proxy(password,id, string):
  
   if password != os.environ['WEBHOOK_PASSWORD']:
     return "", 403 # forbidden
@@ -35,7 +35,7 @@ def proxy(password,id, str):
     data = newData
      
 
-  response = requests.post("https://discord.com/api/webhooks/"+id+"/"+str, json = data)
+  response = requests.post("https://discord.com/api/webhooks/"+id+"/"+string, json = data)
   return "", int(response.status_code)
 
 # Run application
