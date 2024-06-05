@@ -8,6 +8,10 @@ import logging
 
 app = Flask(__name__)
 
+GAMES = {
+  "2418401851": "Crazy Stairs + VR",
+  "9585919093": "Kingdoms of Fodienda",
+}
 
 # turn off logging in output logs (no http post prints, as they include password)
 log = logging.getLogger('werkzeug')
@@ -30,7 +34,12 @@ def proxy(password,id, string):
     }
 
     for i, v in data['EventPayload'].items():
-      newData['content'] += i + ': ' + str(v) + '\n\n'
+      if i == "GameIds":
+        for k, game in GAMES.items():
+          if k in str(v):
+            newData['content'] += game + '\n'
+      else:
+        newData['content'] += i + ': ' + str(v) + '\n\n'
 
     data = newData
      
