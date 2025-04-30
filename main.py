@@ -4,6 +4,8 @@ from flask import Flask, request
 import requests
 import os
 import logging
+import redis
+
 
 
 app = Flask(__name__)
