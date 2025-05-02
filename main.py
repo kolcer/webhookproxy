@@ -45,10 +45,11 @@ def proxy(password,id, string):
 
     data = newData
 
-  elif 'Climbs' in data:
+  elif 'climbs' in data:
+    print(id,string)
     for i, v in data.items():
       print(i,v)   
-    return "", int(response.status_code)
+    return "", 202
 
   response = requests.post("https://discord.com/api/webhooks/"+id+"/"+string, json = data)
   return "", int(response.status_code)
