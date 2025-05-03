@@ -71,7 +71,7 @@ def proxy(password,id, string):
       db.hset(key,alignment + "_infinite",record)
   
     print('success')
-    return "", 200 #success
+    return "", 202 #success
 
   response = requests.post("https://discord.com/api/webhooks/"+id+"/"+string, json = data)
   return "", int(response.status_code)
