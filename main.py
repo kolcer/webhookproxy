@@ -6,7 +6,8 @@ import os
 import logging
 import redis
 
-
+# Set up the data base
+db = redis.from_url(os.environ.get("REDIS_PRIVATE_URL"))
 
 app = Flask(__name__)
 
@@ -46,10 +47,31 @@ def proxy(password,id, string):
     data = newData
 
   elif 'climbs' in data:
-    print(id,string)
-    for i, v in data.items():
-      print(i,v)   
-    return "", 202
+    #id is discord id and string is a token
+    key = "USER_" + str(id)
+
+    #check token
+    if db.hget(key,'token') != string:
+      return "", 403 #wrong token
+    
+    #climbs
+    for alignment, amount in data['climbs'].items():
+      db.hset(key,alignment + "_climbs",amount)
+
+    #classic
+    for alignment, record in data['records']['classic'].items():
+      db.hset(key,alignment + "_classic",record)
+   
+    #pro
+    for alignment, record in data['records']['pro'].items():
+      db.hset(key,alignment + "_pro",record)
+
+    #infinite
+    for alignment, record in data['records']['infinite'].items():
+      db.hset(key,alignment + "_infinite",record)
+  
+    print('success')
+    return "", 202 #accepted
 
   response = requests.post("https://discord.com/api/webhooks/"+id+"/"+string, json = data)
   return "", int(response.status_code)
