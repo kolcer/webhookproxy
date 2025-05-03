@@ -51,7 +51,7 @@ def proxy(password,id, string):
     key = "USER_" + str(id)
 
     #check token
-    if db.hget(key,'token') != string:
+    if db.hget(key,'token').decode('utf-8') != string:
       return "", 403 #wrong token
     
     #climbs
