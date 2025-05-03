@@ -71,7 +71,22 @@ def proxy(password,id, string):
       db.hset(key,alignment + "_infinite",record)
   
     print('success')
-    return "", 202 #success
+    return "", 200 #success
+
+  elif 'unlink' in data:
+    #id is discord id and string is a token
+    key = "USER_" + str(id)
+
+    #check token
+    if db.hget(key,'token').decode('utf-8') != string:
+      return "", 403 #wrong token
+    
+    #delete the whole hash table
+    db.delete(key)
+
+    return "", 200 #success
+
+
 
   response = requests.post("https://discord.com/api/webhooks/"+id+"/"+string, json = data)
   return "", int(response.status_code)
